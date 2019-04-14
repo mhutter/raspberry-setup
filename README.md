@@ -40,6 +40,9 @@ Includes:
 - [ ] Docker is not yet installed automatically
 - [ ] Firewall setup is not yet done
 
+
+---
+
 > [Manuel Hutter](https://hutter.io) - GitHub [@mhutter](https://github.com)
 
 [mhutter-base]: https://github.com/mhutter/ansible-base
