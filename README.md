@@ -5,6 +5,13 @@ Includes:
 * [Traefik][traefik]
 * [Pi-Hole][pihole]
 * [Watchtower][watchtower] (for auto updates)
+* iptables setup
+* OpenVPN configuration
+
+## Limitations
+
+- Docker is not installed automatically. See `curl -fsSL https://get.docker.com -o get-docker.sh`
+- OpenVPN is not installed automatically. See https://docs.pi-hole.net/guides/vpn/overview/
 
 ## Usage
 
@@ -35,10 +42,6 @@ Includes:
 
         ansible-playbook main.yml
 
-## Limitations
-
-- [ ] Docker is not installed automatically
-- [ ] OpenVPN is not installed automatically
 
 ---
 
