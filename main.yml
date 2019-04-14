@@ -1,8 +1,12 @@
 ---
 - hosts: raspberry
+  vars:
+    iptables_phase: pre
   roles:
     - role: mhutter.base
       tags: base
+    - role: mhutter.iptables
+      tags: iptables
 
   tasks:
     - name: Disable unneeded services
@@ -14,8 +18,25 @@
         - bluetooth
         - wifi-country
         - wpa_supplicant
+    - name: Prepare iptables rules
+      copy:
+        content: |
+          -A INPUT -p tcp -m multiport --dports 80,443 -j ACCEPT
+          -A INPUT -p tcp --destination-port 53 -j ACCEPT
+          -A INPUT -p udp --destination-port 53 -j ACCEPT
+          -A INPUT -p udp --destination-port 1194 -j ACCEPT
+        dest: '/etc/iptables/fragments.{{ item }}/10_services'
+        owner: root
+        group: root
+        mode: 0644
+      loop:
+        - v4
+        - v6
+      tags: iptables
 
 - hosts: raspberry
+  vars:
+    iptables_phase: post
   roles:
     - role: traefik
       tags:
@@ -29,3 +50,8 @@
       tags:
         - docker
         - watchtower
+    - role: openvpn
+      tags:
+        - openvpn
+    - role: mhutter.iptables
+      tags: iptables

@@ -37,9 +37,8 @@ Includes:
 
 ## Limitations
 
-- [ ] Docker is not yet installed automatically
-- [ ] Firewall setup is not yet done
-
+- [ ] Docker is not installed automatically
+- [ ] OpenVPN is not installed automatically
 
 ---
 

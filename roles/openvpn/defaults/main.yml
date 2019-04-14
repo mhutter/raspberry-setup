@@ -1,0 +1,5 @@
+---
+openvpn_ip: '{{ ansible_default_ipv4.address }}'
+openvpn_proto: udp
+openvpn_port: 1194
+openvpn_clients: []
