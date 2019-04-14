@@ -1,0 +1,3 @@
+---
+- role: mhutter.base
+  version: master

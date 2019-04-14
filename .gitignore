@@ -1,0 +1,4 @@
+*.img
+group_vars/raspberry.yml
+hosts.yml
+roles/*.*/

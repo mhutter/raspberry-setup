@@ -1,0 +1,41 @@
+---
+- name: Install dependencies
+  package:
+    name: python-docker
+
+- name: Create config/data dir
+  file:
+    path: '{{ traefik_config_dir }}'
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+
+- name: Write traefik config
+  copy:
+    src: traefik.toml
+    dest: '{{ traefik_config_dir }}/traefik.toml'
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Create acme.json
+  file:
+    path: '{{ traefik_config_dir }}/acme.json'
+    state: file
+    owner: root
+    group: root
+    mode: 0600
+
+- name: Start traefik
+  docker_container:
+    name: traefik
+    image: docker.io/library/traefik:latest
+    ports:
+      - '80:80/tcp'
+      - '443:443/tcp'
+    volumes:
+      - '{{ traefik_config_dir }}/traefik.toml:/traefik.toml'
+      - '{{ traefik_config_dir }}/acme.json:/acme.json'
+      - '/var/run/docker.sock:/var/run/docker.sock'
+    restart_policy: unless-stopped

@@ -1,0 +1,31 @@
+---
+- hosts: raspberry
+  roles:
+    - role: mhutter.base
+      tags: base
+
+  tasks:
+    - name: Disable unneeded services
+      service:
+        name: '{{ item }}'
+        enabled: false
+        state: stopped
+      loop:
+        - bluetooth
+        - wifi-country
+        - wpa_supplicant
+
+- hosts: raspberry
+  roles:
+    - role: traefik
+      tags:
+        - docker
+        - traefik
+    - role: pihole
+      tags:
+        - docker
+        - pihole
+    - role: watchtower
+      tags:
+        - docker
+        - watchtower
