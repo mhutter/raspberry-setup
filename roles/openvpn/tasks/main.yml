@@ -4,18 +4,18 @@
 - lineinfile:
     path: /etc/openvpn/server.conf
     regexp: '{{ item.regexp }}'
-    line: '{{ item.line }}'
-    insertafter: '{{ item.insertafter }}'
+    line: '{{ item.line | default(omit) }}'
+    state: '{{ item.state | default("present") }}'
   vars:
     network: '{{ ansible_default_ipv4.network }}'
     netmask: '{{ ansible_default_ipv4.netmask }}'
     address: '{{ ansible_default_ipv4.address }}'
   loop:
+    - regexp: '^push "redirect-gateway '
+      state: absent
     - regexp: '^push "route '
       line: 'push "route {{ network }} {{ netmask }}"'
-      insertafter: '^push "redirect-gateway'
     - regexp: '^push "dhcp-option DNS '
       line: 'push "dhcp-option DNS {{ address }}"'
-      insertafter: '^push "route'
   notify:
     - Restart OpenVPN
