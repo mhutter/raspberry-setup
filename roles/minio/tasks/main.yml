@@ -1,0 +1,35 @@
+---
+# Ensure ansible_default_ipv4 is set
+- setup: {}
+
+- name: Install dependencies
+  package:
+    name: python-docker
+
+- name: Create data dir
+  file:
+    path: '{{ minio_data_dir }}'
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+
+- name: Start minio
+  docker_container:
+    name: minio
+    image: docker.io/mhutter/minio:armhf
+    command:
+      - server
+      - /data
+    env:
+      MINIO_ACCESS_KEY: '{{ minio_access_key }}'
+      MINIO_SECRET_KEY: '{{ minio_secret_key }}'
+    labels:
+      traefik.enable: 'true'
+      traefik.frontend.rule: 'Host:minio.mhnet.me'
+      traefik.port: '9000'
+      traefik.protocol: 'http'
+      traefik.backend: 'minio'
+    volumes:
+      - '{{ minio_data_dir }}:/data'
+    restart_policy: unless-stopped

@@ -33,6 +33,8 @@ Includes:
     traefik_dns2: 1.0.0.1
     traefik_virtual_host: 'TODO: set (pihole.example.com)'
     watchtower_slack_url: 'TODO: get from https://<your slack>.slack.com/apps'
+    minio_access_key: 'TODO: set an access key here'
+    minio_secret_key: 'TODO: set a secret here'
     ```
 0. Install ansible requirements:
 

@@ -46,6 +46,10 @@
       tags:
         - docker
         - pihole
+    - role: minio
+      tags:
+        - docker
+        - minio
     - role: watchtower
       tags:
         - docker
