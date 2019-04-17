@@ -1,17 +1,18 @@
-# Raspberry Pi Setup
+# Raspberry Pi Setup :rocket:
 
 Includes:
 * [Admin user setup][mhutter-base]
 * [Traefik][traefik]
-* [Pi-Hole][pihole]
-* [Watchtower][watchtower] (for auto updates)
+* [Pi-Hole][pihole] - DNS based ad/tracker blocker
+* [MinIO][minio] - S3 compatible storage
+* [Watchtower][watchtower] - auto update of running docker images
 * iptables setup
-* OpenVPN configuration
+* OpenVPN Server configuration
 
 ## Limitations
 
 - Docker is not installed automatically. See `curl -fsSL https://get.docker.com -o get-docker.sh`
-- OpenVPN is not installed automatically. See https://docs.pi-hole.net/guides/vpn/overview/
+- OpenVPN is not installed automatically. See https://docs.pi-hole.net/guides/vpn/overview/ for instructions
 
 ## Usage
 
@@ -52,4 +53,5 @@ Includes:
 [mhutter-base]: https://github.com/mhutter/ansible-base
 [traefik]: https://traefik.io/
 [pihole]: https://pi-hole.net/
+[minio]: https://www.min.io/
 [watchtower]: https://github.com/containrrr/watchtower
