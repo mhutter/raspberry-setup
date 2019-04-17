@@ -28,10 +28,10 @@ Includes:
     ---
     base_admin_username: mhutter
     base_pubkey_url: https://github.com/mhutter.keys
-    traefik_webpassword: 'TODO: set a password here'
-    traefik_dns1: 1.1.1.1
-    traefik_dns2: 1.0.0.1
-    traefik_virtual_host: 'TODO: set (pihole.example.com)'
+    pihole_webpassword: 'TODO: set a password here'
+    pihole_dns1: 1.1.1.1
+    pihole_dns2: 1.0.0.1
+    pihole_virtual_host: 'TODO: set (pihole.example.com)'
     watchtower_slack_url: 'TODO: get from https://<your slack>.slack.com/apps'
     minio_access_key: 'TODO: set an access key here'
     minio_secret_key: 'TODO: set a secret here'
@@ -51,5 +51,5 @@ Includes:
 
 [mhutter-base]: https://github.com/mhutter/ansible-base
 [traefik]: https://traefik.io/
-[pihole]: https://traefik.io/
+[pihole]: https://pi-hole.net/
 [watchtower]: https://github.com/containrrr/watchtower

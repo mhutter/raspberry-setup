@@ -26,14 +26,14 @@
     image: docker.io/pihole/pihole:latest
     dns_servers:
       - '127.0.0.1'
-      - '{{ traefik_dns1 }}'
+      - '{{ pihole_dns1 }}'
     env:
       TZ: Europe/Zurich
-      WEBPASSWORD: '{{ traefik_webpassword }}'
-      DNS1: '{{ traefik_dns1 }}'
-      DNS2: '{{ traefik_dns2 }}'
+      WEBPASSWORD: '{{ pihole_webpassword }}'
+      DNS1: '{{ pihole_dns1 }}'
+      DNS2: '{{ pihole_dns2 }}'
       ServerIP: '{{ ansible_default_ipv4.address }}'
-      VIRTUAL_HOST: '{{ traefik_virtual_host }}'
+      VIRTUAL_HOST: '{{ pihole_virtual_host }}'
     labels:
       traefik.enable: 'true'
       traefik.frontend.rule: 'Host:pihole.mhnet.me'
