@@ -1,0 +1,32 @@
+---
+- set_fact:
+    r_data_dir: '{{ minio_data_root }}/{{ item.name }}'
+    r_container_name: 'minio_{{ item.name }}'
+
+- name: Create data dir
+  file:
+    path: '{{ r_data_dir }}'
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+
+- name: Start minio
+  docker_container:
+    name: '{{ r_container_name }}'
+    image: docker.io/mhutter/minio:armhf
+    command:
+      - server
+      - /data
+    env:
+      MINIO_ACCESS_KEY: '{{ item.access_key }}'
+      MINIO_SECRET_KEY: '{{ item.secret_key }}'
+    labels:
+      traefik.enable: 'true'
+      traefik.frontend.rule: 'Host:{{ item.name }}.{{ minio_domain }}'
+      traefik.port: '{{ 9000+i }}'
+      traefik.protocol: 'http'
+      traefik.backend: '{{ r_container_name }}'
+    volumes:
+      - '{{ r_data_dir }}:/data'
+    restart_policy: unless-stopped

@@ -1,2 +1,3 @@
 ---
-minio_data_dir: /srv/data/minio
+minio_tenants: []
+minio_data_root: /srv/data/minio
